@@ -109,9 +109,9 @@ func (client *VKClient) GroupsGetByID(groupsID []int) ([]*Group, error) {
 	return groupsList, nil
 }
 
-func (client *VKClient) GroupGetMembers(group_id, count, offset int) (int, []*User, error) {
+func (client *VKClient) GroupGetMembers(group_id interface{}, count, offset int) (int, []*User, error) {
 	params := url.Values{}
-	params.Set("group_id", strconv.Itoa(group_id))
+	params.Set("group_id", AnyVal{group_id}.String())
 	params.Set("count", strconv.Itoa(count))
 	params.Set("offset", strconv.Itoa(offset))
 	params.Set("fields", userFields)
