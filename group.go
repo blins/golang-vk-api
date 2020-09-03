@@ -74,8 +74,8 @@ func (client *VKClient) GroupSearch(query string, count int) (int, []*Group, err
 	}
 
 	var res *GroupSearchResult
-	json.Unmarshal(resp.Response, &res)
-	return res.Count, res.Groups, nil
+	err = json.Unmarshal(resp.Response, &res)
+	return res.Count, res.Groups, err
 }
 
 func (client *VKClient) GroupGet(userID int, count int) (int, []*Group, error) {
@@ -89,8 +89,8 @@ func (client *VKClient) GroupGet(userID int, count int) (int, []*Group, error) {
 	}
 
 	var res *GroupSearchResult
-	json.Unmarshal(resp.Response, &res)
-	return res.Count, res.Groups, nil
+	err = json.Unmarshal(resp.Response, &res)
+	return res.Count, res.Groups, err
 }
 
 func (client *VKClient) GroupsGetByID(groupsID []int) ([]*Group, error) {
@@ -104,9 +104,9 @@ func (client *VKClient) GroupsGetByID(groupsID []int) ([]*Group, error) {
 	}
 
 	var groupsList []*Group
-	json.Unmarshal(resp.Response, &groupsList)
+	err = json.Unmarshal(resp.Response, &groupsList)
 
-	return groupsList, nil
+	return groupsList, err
 }
 
 func (client *VKClient) GroupGetMembers(group_id interface{}, count, offset int) (int, []*User, error) {
@@ -121,6 +121,6 @@ func (client *VKClient) GroupGetMembers(group_id interface{}, count, offset int)
 	}
 
 	var res *GroupMembers
-	json.Unmarshal(resp.Response, &res)
-	return res.Count, res.Members, nil
+	err = json.Unmarshal(resp.Response, &res)
+	return res.Count, res.Members, err
 }
